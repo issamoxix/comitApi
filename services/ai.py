@@ -13,19 +13,10 @@ def get_message(code: str):
             "content": [
                 {
                     "type": "text",
-                    "text": PROMPT,
+                    "text": PROMPT + code,
                 }
             ],
-        },
-        {
-            "role": "user",
-            "content": [
-                {
-                    "type": "text",
-                    "text": code,
-                }
-            ],
-        },
+        }
     ]
     response = client.chat.completions.create(
         model="gpt-4o",
