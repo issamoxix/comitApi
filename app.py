@@ -27,4 +27,4 @@ def generate_message(request: request, comitId: str | None = None):
 
 @app.get("/version")
 def version():
-    return {"version": "0.2"}
+    return {"version": "0.3"}
