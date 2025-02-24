@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import logging
 
+import controllers
 from services import ai
 
 
@@ -33,8 +34,8 @@ def generate_message(request: request, comitId: str | None = None):
 
 @app.post("/branch")
 def generate_branch_name(request: BranchNameRequest, comitId: str | None = None):
-    response = ai.get_branch_name(request.context)
-    return {"branch": response}
+    response = controllers.branch_names(request.context, comitId)
+    return response
 
 
 @app.get("/version")
