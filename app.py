@@ -40,4 +40,4 @@ def generate_branch_name(request: BranchNameRequest, comitId: str | None = None)
 
 @app.get("/version")
 def version():
-    return {"version": "0.3.1"}
+    return {"version": "0.4"}
