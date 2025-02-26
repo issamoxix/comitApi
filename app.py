@@ -3,7 +3,6 @@ from pydantic import BaseModel
 import logging
 
 import controllers
-from services import ai
 
 
 logging.basicConfig(
@@ -28,8 +27,8 @@ app = FastAPI()
 def generate_message(request: request, comitId: str | None = None):
     if len(request.code) < 10:
         return {"message": "Code too short"}
-    response = ai.get_message(request.code)
-    return {"message": response}
+    response = controllers.commit_message(request.code, comitId)
+    return response
 
 
 @app.post("/branch")

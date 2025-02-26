@@ -27,10 +27,19 @@ def get_message(code: str):
             "content": [
                 {
                     "type": "text",
-                    "text": PROMPT + code,
+                    "text": PROMPT,
                 }
             ],
-        }
+        },
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": code,
+                }
+            ],
+        },
     ]
     response = openai_response(messages)
     return response.choices[0].message.content
