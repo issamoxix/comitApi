@@ -6,12 +6,13 @@ CONTEXT = defaultdict(list)
 PROMPT = os.getenv("PROMPT")
 BRANCH_PROMPT = os.getenv("BRANCH_PROMPT")
 AGENT_PROMPT = os.getenv("AGENT_PROMPT")
+GPT_MODEL = os.getenv("GPT_MODEL")
 
 
 def openai_response(messages):
     client = OpenAI()
     response = client.chat.completions.create(
-        model="gpt-4o",
+        model=GPT_MODEL,
         messages=messages,
         response_format={"type": "text"},
         temperature=1,
