@@ -4,7 +4,7 @@ import logging
 import os
 
 import controllers
-from services.ai import live_agent_response
+from services.ai import live_agent_response, CONTEXT
 
 
 logging.basicConfig(
@@ -58,6 +58,11 @@ def generate_agent_message(agent_request: AgentRequest, comitId: str | None = No
 def live_agent(request: LiveRequest, comitId: str | None = None):
     response = live_agent_response(request.prompt, comitId)
     return {"prompt": response}
+
+@app.delete("/reset")
+def reset(comitId: str | None = None):
+    del CONTEXT[comitId]
+    return {"message": "Reset"}
 
 
 @app.get("/version")
