@@ -97,3 +97,27 @@ def get_agent_response(prompt: str):
     ]
     response = openai_response(messages)
     return response.choices[0].message.content
+
+
+def live_agent_response(prompt: str, comitId: str):
+    if comitId not in CONTEXT:
+        CONTEXT[comitId] = []
+        CONTEXT[comitId].extend(
+            [
+                {
+                    "role": "system",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": AGENT_PROMPT,
+                        }
+                    ],
+                }
+            ]
+        )
+    CONTEXT[comitId].append(
+        {"role": "user", "content": [{"type": "text", "text": prompt}]}
+    )
+    messages = CONTEXT[comitId]
+    response = openai_response(messages)
+    return response.choices[0].message.content
